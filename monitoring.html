@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Water Quality Monitoring</title>
+  <link rel="stylesheet" href="monitoring.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Water Quality Monitoring Data</h1>
+
+  <!-- Table -->
+  <table id="sensorDataTable">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>pH</th>
+        <th>Turbidity (NTU)</th>
+        <th>TDS (ppm)</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Chart -->
+  <h2>Sensor Readings Over Time</h2>
+  <canvas id="sensorChart" width="600" height="300"></canvas>
+  
+  </div>
+  <a href="/index.html">Back to Main Page</a>
+
+  <script>
+    let chart; // Chart instance
+  
+    function fetchSensorData() {
+      fetch('fetch_data.php')
+        .then(response => response.json())
+        .then(data => {
+          const tableBody = document.querySelector('#sensorDataTable tbody');
+          tableBody.innerHTML = '';
+  
+          const timestamps = [];
+          const phValues = [];
+          const turbidityValues = [];
+          const tdsValues = [];
+  
+          data.forEach(row => {
+            // Populate table
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${row.user_id}</td>
+              <td>${row.ph}</td>
+              <td>${row.turbidity}</td>
+              <td>${row.tds}</td>
+              <td>${row.timestamp}</td>
+            `;
+            tableBody.appendChild(tr);
+  
+            // Prepare chart data (every 5 min assumed in DB)
+            const timeLabel = new Date(row.timestamp).toLocaleTimeString();
+            timestamps.push(timeLabel);
+            phValues.push(parseFloat(row.ph));
+            turbidityValues.push(parseFloat(row.turbidity));
+            tdsValues.push(parseFloat(row.tds));
+          });
+  
+          // Draw/Update chart
+          if (chart) chart.destroy(); // Clear previous chart
+  
+          const ctx = document.getElementById('sensorChart').getContext('2d');
+          chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: timestamps,
+              datasets: [
+                {
+                  label: 'pH',
+                  data: phValues,
+                  backgroundColor: 'rgba(33, 150, 243, 0.7)',
+                },
+                {
+                  label: 'Turbidity (NTU)',
+                  data: turbidityValues,
+                  backgroundColor: 'rgba(76, 175, 80, 0.7)',
+                },
+                {
+                  label: 'TDS (ppm)',
+                  data: tdsValues,
+                  backgroundColor: 'rgba(255, 152, 0, 0.7)',
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'top'
+                },
+                title: {
+                  display: true,
+                  text: 'Water Quality Readings Over Time (5-minute interval)'
+                }
+              },
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Time'
+                  }
+                },
+                y: {
+                  beginAtZero: true,
+                  title: {
+                    display: true,
+                    text: 'Reading Value'
+                  }
+                }
+              }
+            }
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  
+    window.onload = fetchSensorData;
+  </script>
+  
+</body>
+</html>

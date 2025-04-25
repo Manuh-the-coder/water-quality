@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Water Quality Monitoring</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <h1> Water Quality Monitoring Company</h1>
+    <nav>
+      <ul>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/customer.html">Customers</a></li>
+        <li><a href="/monitoring.html">Monitoring</a></li>
+        <li><a href="/help.html">Help</a></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Image Carousel -->
+  <section id="carousel">
+    <div class="carousel-container">
+      <img id="carousel-image" src="bg10.webp" alt="Water Quality Monitoring">
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard">
+    <h2>Dashboard</h2>
+    <div class="alert-box">
+      <p id="alert-message">Checking water quality...</p>
+    </div>
+    <canvas id="reportChart"></canvas>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About</h2>
+    <p>This system monitors real-time water quality and alerts users when contamination levels are too high.</p>
+  </section>
+
+  <!-- Customers Section -->
+  <section id="customers">
+    <h2>Customers</h2>
+    <p>List of registered users and their water quality reports.</p>
+  </section>
+
+  <!-- Monitoring Section -->
+  <section id="monitoring">
+    <h2>Monitoring</h2>
+    <p>Real-time tracking of water quality data.</p>
+  </section>
+
+  <!-- Help Section -->
+  <section id="help">
+    <h2>Help</h2>
+    <p>For support, contact us at support@waterquality.com</p>
+  </section>
+
+  <!-- Script Section -->
+  <script>
+    // ========== IMAGE CAROUSEL ==========
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = ["bg10.webp", "bg12.jpg", "bg13.jpg", "bg14.jpg", "bg23.jpg"];
+      let index = 0;
+
+      function changeImage() {
+        index = (index + 1) % images.length;
+        const carouselImage = document.getElementById("carousel-image");
+        if (carouselImage) {
+          carouselImage.src = images[index];
+        }
+      }
+
+      setInterval(changeImage, 5000); // Change image every 5 seconds
+    });
+
+    // ========== SENSOR DATA FETCH ==========
+    window.onload = function () {
+      fetchLatestSensorData();
+    };
+
+    function fetchLatestSensorData() {
+      fetch('latest_data.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            document.getElementById('alert-message').innerText = "No recent data found.";
+            return;
+          }
+
+          const { ph, turbidity, tds, timestamp } = data;
+          const message = `Dear Customer Your Water Reading at ${timestamp}:\n  pH: ${ph}:\n Turbidity: ${turbidity} NTU:\n TDS: ${tds} ppm`;
+
+          document.getElementById('alert-message').innerText = message;
+
+          const alertBox = document.querySelector('.alert-box');
+          if (ph < 6.5 || ph > 8.5 || turbidity > 50 || tds > 1000) {
+            alertBox.style.background = "darkred";
+          } else {
+            alertBox.style.background = "green";
+          }
+        })
+        .catch(err => {
+          console.error("Error fetching latest data:", err);
+          document.getElementById('alert-message').innerText = "Error fetching data.";
+        });
+    }
+  </script>
+
+</body>
+</html>

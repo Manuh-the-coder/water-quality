@@ -1,0 +1,93 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #f0f0f0);
+    color: #333;
+    padding: 20px;
+    margin: 0;
+  }
+  
+  /* Heading */
+  h1, h2 {
+    text-align: center;
+    color: #0277bd;
+    margin-bottom: 20px;
+  }
+  
+  /* Table Styles */
+  table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  table thead {
+    background-color: #0288d1;
+    color: white;
+  }
+  
+  table th, table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table tr:hover {
+    background-color: #e1f5fe;
+    transition: 0.3s ease-in-out;
+  }
+  
+  /* Responsive Table (Optional) */
+  @media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+  
+    table thead {
+      display: none;
+    }
+  
+    table tr {
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #fff;
+    }
+  
+    table td {
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+    }
+  
+    table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 15px;
+      width: 45%;
+      font-weight: bold;
+      text-align: left;
+      color: #0288d1;
+    }
+  }
+  
+  /* Chart Container */
+  #sensorChart {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(2, 136, 209, 0.1);
+  }
+  
+  /* Chart Wrapper */
+  canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  

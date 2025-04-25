@@ -1,0 +1,81 @@
+
+body {
+    background-image: url(bg23.jpg);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Container styling */
+.container {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.1); /* Transparent background effect */
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Form box */
+.form-box {
+    padding: 20px;
+}
+
+/* Input fields */
+.input-group .input-field {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.input-group .input-field input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 10px;
+    color: #555;
+}
+
+.input-group .input-field i {
+    margin-right: 10px;
+    color: rgb(211, 204, 204);
+}
+
+/* Buttons */
+.btn-field button {
+    width: 100%;
+    padding: 10px;
+    background: #667eea;
+    color: rgb(243, 242, 242);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-field button:hover {
+    background: #6e07e4;
+}
+
+/* Text links */
+p {
+    margin-top: 10px;
+    color: rgb(21, 3, 3);
+}
+
+p a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

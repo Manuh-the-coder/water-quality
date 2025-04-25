@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality System - Home</title>
+    <link rel="stylesheet" href="home.css">
+    <script defer src="https://kit.fontawesome.com/f790b12bdd.js" crossorigin="anonymous"></script>
+    <script defer src="home.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Water Quality System</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-info-circle"></i> About</a></li>
+                <li><a href="customer.html"><i class="fa-solid fa-users"></i> Customers</a></li>
+                <li><a href="monitoring.html"><i class="fa-solid fa-water"></i> Monitoring</a></li>
+                <li><a href="help.html"><i class="fa-solid fa-question-circle"></i> Help</a></li>
+                <li><a href="login.html" class="logout"><i class="fa-solid fa-sign-out"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to the Water Quality Monitoring System</h2>
+        <p>Track and monitor water quality parameters in real-time.</p>
+        <button class="btn" onclick="openForm()">Login</button>
+    </section>
+
+    <div class="form-container" id="form-container">
+        <form id="login-form">
+            <h2>Login</h2>
+            <div class="input-field">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" placeholder="Email Address" name="email" required>
+                <span class="error"></span>
+            </div>
+            <div class="input-field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" placeholder="Password" name="password" required>
+                <span class="error"></span>
+            </div>
+            <div class="btn-field">
+                <button type="submit">Login</button>
+            </div>
+            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Water Quality System. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Profile</title>
+    <link rel="stylesheet" href="customer.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Profile</h1>
+
+        <!-- Display logged-in customer details -->
+        <div class="customer-info">
+            <p><strong>Name:</strong> <?php echo $_SESSION["user_name"]; ?></p>
+            <p><strong>Email:</strong> <?php echo $_SESSION["user_email"]; ?></p>
+            <p><strong>Phone:</strong> <?php echo $_SESSION["user_phone"]; ?></p>
+            <p><strong>Last Login:</strong> <?php echo $_SESSION["login_time"]; ?></p>
+        </div>
+
+        <!-- Button to return to the dashboard (index page) -->
+        <a href="index.html">Back to Main Page</a>
+
+        <!-- Logout button (to destroy the session and logout) -->
+    </div>
+</body>
+</html>
